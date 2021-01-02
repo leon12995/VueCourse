@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://unpkg.com/vue@next" defer></script>
-    <script src="app.js" defer></script>
+    <script src= "app.js" defer></script>
   </head>
   <body>
     <header>
@@ -20,7 +20,14 @@
       <h2>Events in Action</h2>
       <button v-on:click= "add(10)">Add 10</button>
       <button v-on:click = "remove(5)">Substract 5</button>
+      <p v-once>  Starting Counter: {{ counter }}</p>
       <p>Result: {{ counter }}</p>
+      <input type="text"v-on:input="setName($event, 'Lin')" v-on:keyup.enter="confirmInput">
+      <p>Your Name: {{ confirmedName }}</p>
+      <form v-on:submit.prevent="submitForm">
+        <input type="text">
+        <button>Sign Up</button>
+      </form>
     </section>
   </body>
 </html>

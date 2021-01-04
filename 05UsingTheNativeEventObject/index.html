@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Events</h1>
+    </header>
+    <section id="events">
+      <h2>Events in Action</h2>
+      <!-- v-on short cut @  -->
+      <!-- v-bind short cut just has collan value ":value" -->
+      <button v-on:click="add(10)">Add 10</button>
+      <button v-on:click="reduce(5)">Subtract 5</button>
+      <p>Result: {{ counter }}</p>
+      <!-- v-model is a short model about v-bind:value and @:input  -->
+      <!-- two way binding -->
+      <input type="text" v-model = "name">
+      <input type="text" v-model = "lastName">
+      <br>
+      <button @:click="resetInput">Reset Input</button>
+      <!-- Vue 不知道 outputFullname 使用那些data ，所以會reload 執行整個頁面 而不是單個物件  -->
+      <!-- <p>Your Name: {{ outputFullname() }}</p> -->
+      <!-- Vue computed 的 property 不加括弧 -->
+      <p>Your Name: {{  fullname }}</p>
+    </section>
+  </body>
+</html>

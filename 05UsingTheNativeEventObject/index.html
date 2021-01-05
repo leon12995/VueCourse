@@ -23,12 +23,12 @@
       <button v-on:click="add(10)">Add 10</button>
       <button v-on:click="reduce(5)">Subtract 5</button>
       <p>Result: {{ counter }}</p>
-      <!-- v-model is a short model about v-bind:value and @:input  -->
+      <!-- v-model is a short model about v-bind:value and @input  -->
       <!-- two way binding -->
       <input type="text" v-model = "name">
       <input type="text" v-model = "lastName">
       <br>
-      <button @:click="resetInput">Reset Input</button>
+      <button @click="resetInput">Reset Input</button>
       <!-- Vue 不知道 outputFullname 使用那些data ，所以會reload 執行整個頁面 而不是單個物件  -->
       <!-- <p>Your Name: {{ outputFullname() }}</p> -->
       <!-- Vue computed 的 property 不加括弧 -->

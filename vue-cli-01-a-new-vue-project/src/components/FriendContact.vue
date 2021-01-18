@@ -1,32 +1,73 @@
 <template>
     <li>        
-        <h2>{{ friend.name }}</h2>
+        <h2>{{ name }} {{isFavorite  ? '(Favorite)': ''}}</h2>
         <button @click="toggleDetails">{{detailAreVisible ? 'Hide': 'Show'}} Details</button>
+        <button @click='toggleFavorite'>Toggle Favortie</button>
         <ul v-if="detailAreVisible">
-            <li><strong>Phone:</strong>{{ friend.phone }}</li>
-            <li><strong>Email:</strong>{{ friend.email }}</li>
+            <li><strong>Phone:</strong>{{ phoneNumber }}</li>
+            <li><strong>Email:</strong>{{ emailAddress }}</li>
         </ul>
+        <button @click="$emit('delete',id)">Delete</button>
+
     </li>
 </template>
 
 <script>
     export default{
+        // props: ['name',
+        //         'phoneNumber',
+        //         'emailAddress',
+        //         'isFavorite'
+        // ],
+        props: {
+            id: {
+                type :String,
+                required: true,
+            },
+            name: {
+                type:String,
+                required: true
+            },
+            phoneNumber: {
+                type:String,
+                required: true
+            },
+            emailAddress: {
+                type:String,
+                required: true
+            },
+            isFavorite: {
+                type: Boolean,
+                required: false,
+                default: false,
+                // validator: function(value){
+                //     return value === '1' || value === '0';
+                // }
+            },
+        },
+        emits: ['toggle-favorite','delete'],
+        // emits: {
+        //     'toggle-favorite': function (id) {
+        //         if(id){
+        //             return true;
+        //         }else{
+        //             console.warn("Id is missing!");
+        //             return false;
+        //         }
+        //     }
+        // },
         data() {
             return{
                 detailAreVisible: false,
-                friend: 
-                    {
-                        id: 'manuel',
-                        name: 'Manuel Lorenz',
-                        phone: '0123 45678 90',
-                        email: 'manuel@gmail.com'
-                    },
             }
         },
         methods:{
             toggleDetails(){
-                this.detailAreVisible = !this.detailAreVisible;   
-            } 
+                this.detailAreVisible = !this.detailAreVisible;  
+            },
+            toggleFavorite(){
+                this.$emit('toggle-favorite',this.id);
+            },
         }
     };
 </script>

@@ -1,7 +1,8 @@
 <template>
     <div>
-        <button :type="type" :class="mode"></button>
-        <slot></slot>
+        <button :type="type" :class="mode">
+            <slot></slot>
+        </button>
     </div>
 
 </template>

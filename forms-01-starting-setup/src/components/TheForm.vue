@@ -46,6 +46,9 @@
         <input id="how-other" name="how" type="radio" value="other" v-model="how" />
         <label for="how-other">Other</label>
       </div>
+      <div class="form-control">
+        <rating-control v-model="rating"></rating-control>
+      </div>
     </div>
     <div class="form-control">
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm"/>
@@ -58,7 +61,11 @@
 </template>
 
 <script>
+import RatingControl from "./RatingControl.vue"
 export default {
+  components:{
+    RatingControl
+  },
   data(){
     return{
       userName: '',
@@ -67,7 +74,8 @@ export default {
       interest: [],
       how: null,
       confirm: false,
-      userNameValidity: 'pending'
+      userNameValidity: 'pending',
+      rating: null,
     }
   },
   methods: {
@@ -90,9 +98,12 @@ export default {
       console.log('Confirm?');
       console.log(this.confirm);
       this.confirm = false;
+      console.log("Rating");
+      console.log(this.rating);
+      this.rating = null;
     },
     validateInput(){
-      if(this.userName.trim() === ''){
+      if(this.userName === ''){
         this.userNameValidity = 'invalid';
       }else{
         this.userNameValidity = 'valid'

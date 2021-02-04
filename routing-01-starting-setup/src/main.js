@@ -4,14 +4,50 @@ import App from './App.vue';
 import TeamsList from './components/teams/TeamsList.vue'
 import UsersList from './components/users/UsersList.vue'
 import TeamMembers from './components/teams/TeamMembers.vue'
+import NotFound from './components/nav/NotFound.vue'
+import TeamsFooter from './components/teams/TeamsFooter.vue'
+import UsersFooter from './components/users/UsersFooter.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path:'/teams',component: TeamsList }, //our-domaincom/teams => ...
-        { path:'/users',component: UsersList },
-        { path: '/teams/:teamId', component: TeamMembers}
-    ]
+        { path:'/', redirect: '/teams'},
+        { 
+         name: 'teams',   
+         path:'/teams',
+         components: {default: TeamsList ,footer: TeamsFooter}, 
+         children: [
+            { name: 'team-members', 
+              path: ':teamId', 
+              component: TeamMembers, 
+              props: true
+            }, //teams/t1
+         ]
+        }, //our-domaincom/teams => ...
+        { path:'/users',
+          components: {
+              default: UsersList ,
+              footer: UsersFooter} 
+        },
+        
+        { path: '/:notFound(.*)', component: NotFound}
+    ],
+    linkActiveClass: 'active',
+    scrollBehavior(_, _2, savedPosition) {
+        // console.log(to, from , savedPosition);
+        if(savedPosition){
+            return savedPosition;
+        }
+        return {left:0,  top: 0,}
+    }
 });
+
+router.beforeEach(function(to, from, next){
+    console.log('Global berforeEach');
+    console.log(to, from);
+    if(to.name === 'team-members')
+    next({name: 'team-members', params: {teamId: 't2'}});
+});
+
 
 const app = createApp(App)
 app.use(router);
